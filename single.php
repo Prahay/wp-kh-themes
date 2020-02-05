@@ -22,26 +22,22 @@ get_header();
                             if($single_post_featured_image_view == 'default'){
                                 do_action('newsphere_action_single_header');
                             }
-
-
                             ?>
                             <?php
                             get_template_part('template-parts/content', get_post_type());
                             ?>
                         </div>
                         <?php
-                        $show_related_posts = esc_attr(newsphere_get_option('single_show_related_posts'));
+                        /* $show_related_posts = esc_attr(newsphere_get_option('single_show_related_posts'));
                         if ($show_related_posts):
                             if ('post' === get_post_type()) :
                                 newsphere_get_block('related');
                             endif;
-                        endif;
-                        ?>
-                        <?php
+                        endif; */
                         // If comments are open or we have at least one comment, load up the comment template.
-                        if (comments_open() || get_comments_number()) :
+                        /* if (comments_open() || get_comments_number()) :
                             comments_template();
-                        endif;
+                        endif; */
                         ?>
                     </article>
                 <?php
@@ -52,7 +48,6 @@ get_header();
             </main><!-- #main -->
         </div><!-- #primary -->
         <?php ?>
-        <?php
-        get_sidebar(); ?>
+        
 <?php
 get_footer();

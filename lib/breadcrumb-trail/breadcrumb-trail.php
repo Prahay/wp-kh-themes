@@ -64,7 +64,7 @@ function breadcrumb_trail_print_styles() {
 			padding:     0;
 			border:      none;
 			background:  transparent;
-			text-indent: 0;
+			text-indent: 0;			
 		}
 
 		.breadcrumbs .trail-browse {

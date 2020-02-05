@@ -35,6 +35,7 @@ if (!function_exists('newsphere_banner_tabbed_posts')):
 
 
                         <li class="tab tab-recent active">
+                            
                             <a href="#<?php echo esc_attr($tab_id); ?>-recent"
                                aria-controls="<?php esc_attr_e('Recent', 'newsphere'); ?>" role="tab"
                                data-toggle="tab" class="font-family-1">

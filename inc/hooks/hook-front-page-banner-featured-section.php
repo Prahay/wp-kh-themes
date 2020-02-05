@@ -34,6 +34,24 @@ if (!function_exists('newsphere_banner_featured_section')):
                             <?php do_action('newsphere_action_banner_featured_posts'); ?>
 
                         </div>
+                        <br><br>
+                        <!-- banner event-->
+                        <div class="container-wrapper">
+                            <center>
+                            <h4 class="header-after1 ">
+                            	<span class="">
+                            		EVENT
+                            	</span>
+                            </h4>
+                            <a href="https://klikhukum.id/events/uii-law-fair-piala-moh-natsir-2020/">
+                                <img src="https://klikhukum.id/wp-content/uploads/2020/01/banner-uii-event-law-fair-scaled.jpg" alt="" srcset="">
+                            </a>
+                            <hr>
+                            <a href="https://klikhukum.id/kejujuran-dalam-air-kata-kata/">
+                                <img src="https://klikhukum.id/wp-content/uploads/2020/01/desain-klik-hukum.jpg" alt="" srcset="">
+                            </a>
+                        </center>
+                        </div>    
                     </section>
                 <?php endif;
             }

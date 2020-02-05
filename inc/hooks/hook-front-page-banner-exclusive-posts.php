@@ -9,7 +9,7 @@ if (!function_exists('newsphere_banner_trending_posts')):
     function newsphere_banner_exclusive_posts()  {
 
         if ( false != newsphere_get_option('show_popular_tags_section')) : ?>
-            <div class="aft-popular-tags">
+            <div class="aft-popular-tags" hidden>
                 <div class="container-wrapper">
                     <?php
 
@@ -42,7 +42,7 @@ if (!function_exists('newsphere_banner_trending_posts')):
                 $number_of_posts = newsphere_get_option('number_of_flash_news');
                 $em_ticker_news_title = newsphere_get_option('flash_news_title');
 
-                $all_posts = newsphere_get_posts($number_of_posts, $category);
+                $all_posts = newsphere_get_posts_rand($number_of_posts);
                 $show_trending = true;
                 $count = 1;
                 ?>
@@ -50,12 +50,12 @@ if (!function_exists('newsphere_banner_trending_posts')):
                 <div class="container-wrapper">
                     <div class="exclusive-posts">
                         <div class="exclusive-now primary-color">
-                            <strong>
-                                <i class="fa fa-spin fa-circle-o-notch"></i>
+                            <!-- <strong>
+                                <i class="fa fa-comments"></i>
                                 <?php if (!empty($em_ticker_news_title)): ?>
-                                    <span><?php echo esc_html($em_ticker_news_title); ?></span>
+                                    <span>CURKUM</span>
                                 <?php endif; ?>
-                            </strong>
+                            </strong> -->
                         </div>
                         <div class="exclusive-slides" dir="ltr">
                             <?php
@@ -64,8 +64,8 @@ if (!function_exists('newsphere_banner_trending_posts')):
                                  data-gap='0' data-duplicated='true' data-direction="<?php echo esc_attr($dir); ?>" >
                                 <?php
                                 while ($all_posts->have_posts()) : $all_posts->the_post();
-                                    $aft_post_id = get_the_ID();
-                                    $url = newsphere_get_freatured_image_url($aft_post_id, 'thumbnail');
+                                    global $post;
+                                    $url = newsphere_get_freatured_image_url($post->ID, 'thumbnail');
                                     ?>
                                     <a href="<?php the_permalink(); ?>">
                                         <?php if ($show_trending == true): ?>
@@ -74,7 +74,7 @@ if (!function_exists('newsphere_banner_trending_posts')):
 
                                         <span class="circle-marq">
                                             <span class="trending-no">
-                                                <?php echo sprintf(__('%s', 'newsphere'), $count); ?>
+                                                <?php echo sprintf(__('%s', 'newsphere')); ?>
                                             </span>
                                             <?php if ($url) { ?>
                                                 <img src="<?php echo esc_url($url); ?>"

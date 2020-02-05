@@ -18,7 +18,7 @@ if (!class_exists('Newsphere_Posts_List')) :
             $widget_ops = array(
                 'classname' => 'newsphere_posts_list list-layout',
                 'description' => __('Displays posts from selected category in a list.', 'newsphere'),
-
+                'customize_selective_refresh' => true,
             );
 
             parent::__construct('newsphere_posts_list', __('AFTN Posts List', 'newsphere'), $widget_ops);
@@ -69,8 +69,8 @@ if (!class_exists('Newsphere_Posts_List')) :
                     $count = 1;
                     if ($all_posts->have_posts()) :
                         while ($all_posts->have_posts()) : $all_posts->the_post();
-                            $aft_post_id = get_the_ID();
-                            $url = newsphere_get_freatured_image_url($aft_post_id, 'thumbnail');
+                            global $post;
+                            $url = newsphere_get_freatured_image_url($post->ID, 'thumbnail');
 
                             ?>
 
@@ -81,8 +81,8 @@ if (!class_exists('Newsphere_Posts_List')) :
                                          data-background="<?php echo esc_url($url); ?>">
                                         <img src="<?php echo esc_url($url); ?>">
                                         <span class="min-read-post-format">
-		  								<?php echo newsphere_post_format($aft_post_id); ?>
-                                        <?php newsphere_count_content_words($aft_post_id); ?>
+		  								<?php echo newsphere_post_format($post->ID); ?>
+                                        <?php newsphere_count_content_words($post->ID); ?>
                                         </span>
 
                                         <a href="<?php the_permalink(); ?>"></a>
@@ -97,7 +97,7 @@ if (!class_exists('Newsphere_Posts_List')) :
                                             </h4>
                                         </div>
                                         <div class="entry-meta">
-                                            <?php newsphere_get_comments_count($aft_post_id); ?>
+                                            <?php newsphere_get_comments_count($post->ID); ?>
                                             <?php newsphere_post_item_meta(); ?>
                                         </div>
                                     </div>

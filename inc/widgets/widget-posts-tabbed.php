@@ -19,7 +19,7 @@ if (!class_exists('Newsphere_Tabbed_Posts')) :
             $widget_ops = array(
                 'classname' => 'newsphere_tabbed_posts_widget',
                 'description' => __('Displays tabbed posts lists from selected settings.', 'newsphere'),
-
+                'customize_selective_refresh' => true,
             );
 
             parent::__construct('newsphere_tabbed_posts', __('AFTN Tabbed Posts', 'newsphere'), $widget_ops);

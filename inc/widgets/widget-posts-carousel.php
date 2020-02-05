@@ -18,7 +18,7 @@ if (!class_exists('Newsphere_Posts_Carousel')) :
             $widget_ops = array(
                 'classname' => 'newsphere_posts_carousel_widget grid-layout',
                 'description' => __('Displays posts carousel from selected category.', 'newsphere'),
-
+                'customize_selective_refresh' => true,
             );
 
             parent::__construct('newsphere_posts_carousel', __('AFTN Posts Carousel', 'newsphere'), $widget_ops);
@@ -68,8 +68,8 @@ if (!class_exists('Newsphere_Posts_Carousel')) :
                         while ($all_posts->have_posts()) : $all_posts->the_post();
 
 
-                            $aft_post_id = get_the_ID();
-                            $url = newsphere_get_freatured_image_url($aft_post_id, 'newsphere-medium');
+                            global $post;
+                            $url = newsphere_get_freatured_image_url($post->ID, 'newsphere-medium');
                             ?>
 
                             <div class="swiper-slide">
@@ -78,13 +78,13 @@ if (!class_exists('Newsphere_Posts_Carousel')) :
                                              data-background="<?php echo esc_url($url); ?>">
                                             <img src="<?php echo esc_url($url); ?>">
                                             <span class="min-read-post-format">
-                                            <?php echo newsphere_post_format($aft_post_id); ?>
-                                            <?php newsphere_count_content_words($aft_post_id); ?>
+                                            <?php echo newsphere_post_format($post->ID); ?>
+                                            <?php newsphere_count_content_words($post->ID); ?>
 
                                             </span>
 
                                             <a href="<?php the_permalink(); ?>"></a>
-                                            <?php newsphere_get_comments_count($aft_post_id); ?>
+                                            <?php newsphere_get_comments_count($post->ID); ?>
                                         </div>
                                         <div class="read-details color-tp-pad no-color-pad">
                                             <div class="read-categories">

@@ -81,12 +81,12 @@ if (!function_exists('newsphere_post_item_meta')) :
 
             if ($display_setting == 'show-date-author' || $display_setting == 'show-date-only'): ?>
                 <span class="item-metadata posts-date">
-                <i class="fa fa-clock-o"></i>
+                <!-- <i class="fa fa-calendar"></i> -->
                     <?php
                     if ($date_display_setting == 'default-date') {
                         the_time(get_option('date_format'));
                     } else {
-                        echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ' . __('ago', 'newsphere');
+                        echo get_the_date();
                     }
 
                     ?>
@@ -94,8 +94,8 @@ if (!function_exists('newsphere_post_item_meta')) :
             <?php endif; ?>
                 <?php if ($display_setting == 'show-date-author' || $display_setting == 'show-author-only'): ?>
 
-                    <span class="item-metadata posts-author byline">
-                    <i class="fa fa-pencil-square-o"></i>
+                     |  <span class="item-metadata posts-author byline">
+                    <!-- <i class="fa fa-user"></i> -->
             <a href="<?php echo esc_url(get_author_posts_url($author_id)) ?>">
                 <?php echo esc_html(get_the_author_meta('display_name', $author_id)); ?>
             </a>

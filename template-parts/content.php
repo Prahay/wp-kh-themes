@@ -28,13 +28,13 @@
             )); ?>
             <?PHP if (is_single()): ?>
                 <div class="post-item-metadata entry-meta">
-                    <?php newsphere_post_item_tag(); ?>
+                    <?php /* newsphere_post_item_tag(); */ ?>
                 </div>
             <?php endif; ?>
             <?php
             the_post_navigation(array(
-                'prev_text' => __('<span class="em-post-navigation">Previous</span> %title', 'newsphere'),
-                'next_text' => __('<span class="em-post-navigation">Next</span> %title', 'newsphere'),
+                'prev_text' => __('<span class="em-post-navigation"><< BALIK</span> %title', 'newsphere'),
+                'next_text' => __('<span class="em-post-navigation">LANJUT >></span> %title', 'newsphere'),
                 'in_same_term' => true,
                 'taxonomy' => __('category', 'newsphere'),
                 'screen_reader_text' => __('Continue Reading', 'newsphere'),
@@ -47,8 +47,7 @@
             ?>
         </div><!-- .entry-content -->
     </div>
+    
 <?php else:
-
- do_action('newsphere_action_archive_layout');
-
+    do_action('newsphere_action_archive_layout');    
 endif;

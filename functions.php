@@ -110,7 +110,55 @@ if (!function_exists('newsphere_setup')):
 endif;
 add_action('after_setup_theme', 'newsphere_setup');
 
+/**
+ * Demo export/import
+ *
+ * Eventually, some of the functionality here could be replaced by core features.
+ *
+ * @package Newsphere
+ */
+if (!function_exists('newsphere_ocdi_files')) :
+    /**
+     * OCDI files.
+     *
+     * @since 1.0.0
+     *
+     * @return array Files.
+     */
+    function newsphere_ocdi_files() {
 
+        return apply_filters( 'aft_demo_import_files', array(
+            array(
+
+                'import_file_name'             => esc_html__( 'Newsphere Default', 'newsphere' ),
+                'local_import_file'            => trailingslashit( get_template_directory() ) . 'demo-content/default/newsphere.xml',
+                'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'demo-content/default/newsphere.wie',
+                'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'demo-content/default/newsphere.dat',
+                'import_preview_image_url'     => trailingslashit( get_template_directory_uri() ) . 'demo-content/assets/newsphere.jpg',
+                'preview_url'                  => 'https://demo.afthemes.com/newsphere/',
+            ),
+            array(
+
+                'import_file_name'             => esc_html__( 'Newsphere Sport', 'newsphere' ),
+                'local_import_file'            => trailingslashit( get_template_directory() ) . 'demo-content/sport/newsphere.xml',
+                'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'demo-content/sport/newsphere.wie',
+                'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'demo-content/sport/newsphere.dat',
+                'import_preview_image_url'     => trailingslashit( get_template_directory_uri() ) . 'demo-content/assets/sport.jpg',
+                'preview_url'                  => 'https://demo.afthemes.com/newsphere/sport',
+            ),
+            array(
+
+                'import_file_name'             => esc_html__( 'Newsphere Fashion', 'newsphere' ),
+                'local_import_file'            => trailingslashit( get_template_directory() ) . 'demo-content/fashion/newsphere.xml',
+                'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'demo-content/fashion/newsphere.wie',
+                'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'demo-content/fashion/newsphere.dat',
+                'import_preview_image_url'     => trailingslashit( get_template_directory_uri() ) . 'demo-content/assets/fashion.jpg',
+                'preview_url'                  => 'https://demo.afthemes.com/newsphere/fashion',
+            ),
+        ));
+    }
+endif;
+add_filter( 'pt-ocdi/import_files', 'newsphere_ocdi_files');
 
 /**
  * function for google fonts
@@ -340,4 +388,128 @@ function newsphere_menu_notitle( $menu ){
 add_filter( 'wp_nav_menu', 'newsphere_menu_notitle' );
 add_filter( 'wp_page_menu', 'newsphere_menu_notitle' );
 add_filter( 'wp_list_categories', 'newsphere_menu_notitle' );
+
+
+function print_pre($args)
+{
+    if ($args) {
+        echo "<pre>";
+        print_r($args);
+        echo "</pre>";
+    } else {
+        echo "<pre>";
+        print_r('Empty');
+        echo "</pre>";
+    }
+
+}
+
+
+class mishaDateRange{
+ 
+	function __construct(){
+ 
+		// if you do not want to remove default "by month filter", remove/comment this line
+		add_filter( 'months_dropdown_results', '__return_empty_array' );
+ 
+		// include CSS/JS, in our case jQuery UI datepicker
+		add_action( 'admin_enqueue_scripts', array( $this, 'jqueryui' ) );
+ 
+		// HTML of the filter
+		add_action( 'restrict_manage_posts', array( $this, 'form' ) );
+ 
+		// the function that filters posts
+		add_action( 'pre_get_posts', array( $this, 'filterquery' ) );
+ 
+	}
+ 
+	/*
+	 * Add jQuery UI CSS and the datepicker script
+	 * Everything else should be already included in /wp-admin/ like jquery, jquery-ui-core etc
+	 * If you use WooCommerce, you can skip this function completely
+	 */
+	function jqueryui(){
+		wp_enqueue_style( 'jquery-ui', '//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css' );
+		wp_enqueue_script( 'jquery-ui-datepicker' );
+	}
+ 
+	/*
+	 * Two input fields with CSS/JS
+	 * If you would like to move CSS and JavaScript to the external file - welcome.
+	 */
+	function form(){
+ 
+		$from = ( isset( $_GET['mishaDateFrom'] ) && $_GET['mishaDateFrom'] ) ? $_GET['mishaDateFrom'] : '';
+		$to = ( isset( $_GET['mishaDateTo'] ) && $_GET['mishaDateTo'] ) ? $_GET['mishaDateTo'] : '';
+ 
+		echo '<style>
+		input[name="mishaDateFrom"], input[name="mishaDateTo"]{
+			line-height: 28px;
+			height: 28px;
+			margin: 0;
+			width:125px;
+		}
+		</style>
+ 
+		<input type="text" name="mishaDateFrom" placeholder="Date From" value="' . esc_attr( $from ) . '" />
+		<input type="text" name="mishaDateTo" placeholder="Date To" value="' . esc_attr( $to ) . '" />
+ 
+		<script>
+		jQuery( function($) {
+			var from = $(\'input[name="mishaDateFrom"]\'),
+			    to = $(\'input[name="mishaDateTo"]\');
+ 
+			$( \'input[name="mishaDateFrom"], input[name="mishaDateTo"]\' ).datepicker( {dateFormat : "yy-mm-dd"} );
+			// by default, the dates look like this "April 3, 2017"
+    			// I decided to make it 2017-04-03 with this parameter datepicker({dateFormat : "yy-mm-dd"});
+ 
+ 
+    			// the rest part of the script prevents from choosing incorrect date interval
+    			from.on( \'change\', function() {
+				to.datepicker( \'option\', \'minDate\', from.val() );
+			});
+ 
+			to.on( \'change\', function() {
+				from.datepicker( \'option\', \'maxDate\', to.val() );
+			});
+ 
+		});
+		</script>';
+ 
+	}
+ 
+	/*
+	 * The main function that actually filters the posts
+	 */
+	function filterquery( $admin_query ){
+		global $pagenow;
+ 
+		if (
+			is_admin()
+			&& $admin_query->is_main_query()
+			// by default filter will be added to all post types, you can operate with $_GET['post_type'] to restrict it for some types
+			&& in_array( $pagenow, array( 'edit.php', 'upload.php' ) )
+			&& ( ! empty( $_GET['mishaDateFrom'] ) || ! empty( $_GET['mishaDateTo'] ) )
+		) {
+ 
+			$admin_query->set(
+				'date_query', // I love date_query appeared in WordPress 3.7!
+				array(
+					'after' => sanitize_text_field( $_GET['mishaDateFrom'] ), // any strtotime()-acceptable format!
+					'before' => sanitize_text_field( $_GET['mishaDateTo'] ),
+					'inclusive' => true, // include the selected days as well
+					'column'    => 'post_date' // 'post_modified', 'post_date_gmt', 'post_modified_gmt'
+				)
+			);
+ 
+		}
+ 
+		return $admin_query;
+ 
+	}
+ 
+}
+new mishaDateRange();
+//
+//===============
 

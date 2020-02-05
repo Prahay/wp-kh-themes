@@ -18,7 +18,7 @@ if (!class_exists('Newsphere_Single_Col_Categorised_Posts')) :
             $widget_ops = array(
                 'classname' => 'newsphere_single_col_categorised_posts',
                 'description' => __('Displays posts from selected category in single column.', 'newsphere'),
-
+                'customize_selective_refresh' => true,
             );
 
             parent::__construct('newsphere_single_col_categorised_posts', __('AFTN Single Column ', 'newsphere'), $widget_ops);
@@ -69,9 +69,9 @@ if (!class_exists('Newsphere_Single_Col_Categorised_Posts')) :
                 <?php
                 if ($all_posts->have_posts()) :
                     while ($all_posts->have_posts()) : $all_posts->the_post();
-                        $aft_post_id = get_the_ID();
+                        global $post;
 
-                        $url = newsphere_get_freatured_image_url($aft_post_id, 'newsphere-medium');
+                        $url = newsphere_get_freatured_image_url($post->ID, 'newsphere-medium');
 
                         ?>
 
@@ -82,13 +82,13 @@ if (!class_exists('Newsphere_Single_Col_Categorised_Posts')) :
                                     <img src="<?php echo esc_url($url); ?>">
                                 <?php endif; ?>
                                 <span class="min-read-post-format">
-		  								<?php echo newsphere_post_format($aft_post_id); ?>
-                                        <?php newsphere_count_content_words($aft_post_id); ?>
+		  								<?php echo newsphere_post_format($post->ID); ?>
+                                        <?php newsphere_count_content_words($post->ID); ?>
 
                                         </span>
 
                                 <a href="<?php the_permalink(); ?>"></a>
-                                <?php newsphere_get_comments_count($aft_post_id); ?>
+                                <?php newsphere_get_comments_count($post->ID); ?>
                             </div>
                             <div class="read-details col-2 float-l pad af-sec-list-txt color-tp-pad">
                                 <div class="read-categories">

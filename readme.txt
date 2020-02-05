@@ -3,7 +3,7 @@
 Contributors: AF themes
 Requires at least: 4.0
 Tested up to: 5
-Stable tag: 1.0.5
+Stable tag: 1.0.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: news, blog, entertainment, one-column, two-columns, left-sidebar, right-sidebar, custom-background, custom-menu, featured-images, full-width-template, custom-header, translation-ready, rtl-language-support, theme-options, threaded-comments
@@ -37,13 +37,6 @@ Newsphere is a perfect news and magazine responsive WordPress theme that lets yo
 Newsphere includes support for Infinite Scroll in Jetpack.
 
 == Change log ==
-= 1.0.5 - Jan 20 2020 =
-* Updates - Breadcrumbs schema.
-* Updates - Top Header date format to default WP Settings.
-* Fixes - IE/Edge dropdown glitch.
-* Fixes - Some styling glitch.
-
-
 = 1.0.4 - July 11 2019 =
 * Spinner has been disabled for Elementor
 * Vertical slider issue on mobile has been fixed

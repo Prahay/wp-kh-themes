@@ -162,7 +162,7 @@ if (!function_exists('newsphere_render_posts')):
                             $url = '';
                             $col_class = 'col-sm-12';
                         }
-                        $aft_post_id = get_the_ID();
+                        global $post;
                         ?>
                         <?php if (!empty($url)): ?>
                             <div class="data-bg read-img pos-rel col-4 float-l read-bg-img"
@@ -171,7 +171,7 @@ if (!function_exists('newsphere_render_posts')):
                                     <img src="<?php echo esc_url($url); ?>"/>
                                 <a href="<?php the_permalink(); ?>"></a>
                                 <span class="min-read-post-format">
-                                                <?php newsphere_count_content_words($aft_post_id); ?>
+                                                <?php newsphere_count_content_words($post->ID); ?>
                                             </span>
 
                             </div>
@@ -192,7 +192,7 @@ if (!function_exists('newsphere_render_posts')):
                                     </h4>
                                 </div>
                                 <div class="entry-meta">
-                                    <?php newsphere_get_comments_count($aft_post_id); ?>
+                                    <?php newsphere_get_comments_count($post->ID); ?>
                                     <?php newsphere_post_item_meta(); ?>
                                 </div>
                                 <?php if ($show_excerpt != 'false'): ?>

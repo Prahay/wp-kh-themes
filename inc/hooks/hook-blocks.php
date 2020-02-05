@@ -53,7 +53,7 @@ if ( ! function_exists( 'newsphere_archive_layout' ) ) :
         $archive_args = newsphere_archive_layout_class($cat_slug);
 
 		?>
-
+		
 		<?php if ( ! empty( $archive_args['data_mh'] ) ): ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class( $archive_args['add_archive_class'] ); ?>
                      data-mh="<?php echo esc_attr( $archive_args['data_mh'] ); ?>">

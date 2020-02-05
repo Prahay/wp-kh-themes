@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file
  *
@@ -13,65 +14,70 @@
  */
 
 get_header(); ?>
-    <section class="section-block-upper">
+<h4 class="header-after1 ">
+	<span class="">
+		Terbaru
+	</span>
+</h4>
+<section class="section-block-upper">
 
-        <div id="primary" class="content-area">
-            <main id="main" class="site-main">
-                <!--<div class="af-container-row">-->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
+			<!--<div class="af-container-row">-->
+
+			<?php
+			if (have_posts()) :
+
+				if (is_home() && !is_front_page()) : ?>
+					<header>
+						<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+					</header>
 
 				<?php
-				if ( have_posts() ) :
-
-					if ( is_home() && ! is_front_page() ) : ?>
-                        <header>
-                            <h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-                        </header>
-
-					<?php
 					endif;
 
 					//div wrap start
-                        do_action('newsphere_archive_layout_before_loop');
+					do_action('newsphere_archive_layout_before_loop');
 					?>
-                    <!--<div class="af-container-row aft-archive-wrapper clearfix <?php /*echo esc_attr( $archive_class ); */?>">-->
+				<!--<div class="af-container-row aft-archive-wrapper clearfix <?php /*echo esc_attr( $archive_class ); */ ?>">-->
 
-						<?php while ( have_posts() ) : the_post();
+				<?php while (have_posts()) : the_post();
 
-							/*
+						/*
 							 * Include the Post-Format-specific template for the content.
 							 * If you want to override this in a child theme, then include a file
 							 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 							 */
 
-							get_template_part( 'template-parts/content', get_post_format() );
+						get_template_part('template-parts/content', get_post_format());
 
 
-						endwhile;
+					endwhile;
 					//div wrap end
-						do_action('newsphere_archive_layout_after_loop');
+					do_action('newsphere_archive_layout_after_loop');
 
-						?>
+					?>
 
-				<?php
+			<?php
 
-				else :
-					get_template_part( 'template-parts/content', 'none' );
+			else :
+				get_template_part('template-parts/content', 'none');
 
-				endif; ?>
+			endif; ?>
 
-                <!--</div>-->
-            </main><!-- #main -->
-            <div class="col col-ten">
-                <div class="newsphere-pagination">
-					<?php newsphere_numeric_pagination(); ?>
-                </div>
-            </div>
-        </div><!-- #primary -->
+			<!--</div>-->
+		</main><!-- #main -->
+		<div class="col col-ten">
+			<div class="newsphere-pagination">
+				<?php newsphere_numeric_pagination(); ?>
+			</div>
+		</div>
+	</div><!-- #primary -->
 
-		<?php
-		get_sidebar();
-		?>
+	<?php
+	/* get_sidebar(); */
+	?>
 
-    </section>
+</section>
 <?php
 get_footer();

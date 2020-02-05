@@ -1,4 +1,5 @@
 <?php
+
 /**
  * List block part for displaying header content in page.php
  *
@@ -14,7 +15,6 @@ if (has_header_image()) {
     $background = get_header_image();
 }
 
-$show_date = newsphere_get_option('show_date_section');
 $show_social_menu = newsphere_get_option('show_social_menu_section');
 ?>
 <?php if (is_active_sidebar('off-canvas-panel') || (has_nav_menu('aft-social-nav') && $show_social_menu == true) || ($show_date == true)) : ?>
@@ -22,61 +22,69 @@ $show_social_menu = newsphere_get_option('show_social_menu_section');
         <div class="container-wrapper">
             <div class="top-bar-flex">
                 <div class="top-bar-left col-2">
-
+                    <a href="https://www.facebook.com/klikhukumid-1694369360632539/">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/klikhukumid">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/klikhukum.id/">
+                        <i class="fa fa-instagram"></i>
+                    </a>
                     <?php if (is_active_sidebar('off-canvas-panel')) : ?>
                         <div class="off-cancas-panel">
-  							<span class="offcanvas">
-  								<a href="#" class="offcanvas-nav">
-  									<div class="offcanvas-menu">
-  										<span class="mbtn-top"></span>
-  										<span class="mbtn-mid"></span>
-  										<span class="mbtn-bot"></span>
-  									</div>
-  								</a>
-  							</span>
+                            <span class="offcanvas">
+                                <a href="#" class="offcanvas-nav">
+                                    <div class="offcanvas-menu">
+                                        <span class="mbtn-top"></span>
+                                        <span class="mbtn-mid"></span>
+                                        <span class="mbtn-bot"></span>
+                                    </div>
+                                </a>
+                            </span>
                         </div>
                     <?php endif; ?>
 
                     <div class="date-bar-left">
                         <?php
 
-                        if ($show_date == true): ?>
+                            if ($show_date == true) : ?>
                             <span class="topbar-date">
-                                       <?php
-                                       the_time(get_option('date_format'));
-                                       ?>
-                                    </span>
+                                <?php
+                                        echo date_i18n('D. M jS, Y ', strtotime(current_time("Y-m-d")));
+                                        ?>
+                            </span>
 
                         <?php endif; ?>
                     </div>
                 </div>
 
                 <div class="top-bar-right col-2">
-  						<span class="aft-small-social-menu">
-  							<?php
+                    <span class="aft-small-social-menu">
+                        <?php
 
-                            if (has_nav_menu('aft-social-nav') && $show_social_menu == true): ?>
+                            if (has_nav_menu('aft-social-nav') && $show_social_menu == true) : ?>
 
-                                <?php
-                                wp_nav_menu(array(
-                                    'theme_location' => 'aft-social-nav',
-                                    'link_before' => '<span class="screen-reader-text">',
-                                    'link_after' => '</span>',
-                                    'menu_id' => 'social-menu',
-                                    'container' => 'div',
-                                    'container_class' => 'social-navigation'
-                                ));
-                                ?>
+                            <?php
+                                    wp_nav_menu(array(
+                                        'theme_location' => 'aft-social-nav',
+                                        'link_before' => '<span class="screen-reader-text">',
+                                        'link_after' => '</span>',
+                                        'menu_id' => 'social-menu',
+                                        'container' => 'div',
+                                        'container_class' => 'social-navigation'
+                                    ));
+                                    ?>
 
-                            <?php endif; ?>
-  						</span>
+                        <?php endif; ?>
+                    </span>
                 </div>
             </div>
         </div>
 
     </div>
 <?php endif; ?>
-<div class="main-header <?php echo esc_attr($class); ?>" data-background="<?php echo esc_attr($background); ?>">
+<!-- <div class="main-header <?php echo esc_attr($class); ?>" data-background="<?php echo esc_attr($background); ?>">
     <div class="container-wrapper">
         <div class="af-container-row af-flex-container">
             <div class="col-3 float-l pad">
@@ -111,4 +119,4 @@ $show_social_menu = newsphere_get_option('show_social_menu_section');
         </div>
     </div>
 
-</div>
+</div> -->

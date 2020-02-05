@@ -18,7 +18,7 @@ if (!class_exists('Newsphere_Posts_Slider')) :
             $widget_ops = array(
                 'classname' => 'newsphere_posts_slider_widget',
                 'description' => __('Displays posts slider from selected category.', 'newsphere'),
-
+                'customize_selective_refresh' => true,
             );
 
             parent::__construct('newsphere_posts_slider', __('AFTN Posts Slider', 'newsphere'), $widget_ops);
@@ -67,8 +67,8 @@ if (!class_exists('Newsphere_Posts_Slider')) :
                     <?php
                     if ($all_posts->have_posts()) :
                         while ($all_posts->have_posts()) : $all_posts->the_post();
-                            $aft_post_id = get_the_ID();
-                            $url = newsphere_get_freatured_image_url($aft_post_id, 'newsphere-slider-full');
+                            global $post;
+                            $url = newsphere_get_freatured_image_url($post->ID, 'newsphere-slider-full');
                             ?>
                             <div class="swiper-slide">
                                 <div class="big-grid">
@@ -79,13 +79,13 @@ if (!class_exists('Newsphere_Posts_Slider')) :
                                             <?php if (!empty($url)): ?>
                                                 <img src="<?php echo esc_url($url); ?>">
                                             <?php endif; ?>
-                                            <?php newsphere_get_comments_count($aft_post_id); ?>
+                                            <?php newsphere_get_comments_count($post->ID); ?>
                                         </div>
                                         <div class="read-details">
 
                                             <span class="min-read-post-format">
-                                                <?php echo newsphere_post_format($aft_post_id); ?>
-                                                <?php newsphere_count_content_words($aft_post_id); ?>
+                                                <?php echo newsphere_post_format($post->ID); ?>
+                                                <?php newsphere_count_content_words($post->ID); ?>
                                             </span>
                                             <div class="read-categories">
                                                 <?php newsphere_post_categories(); ?>

@@ -188,6 +188,84 @@ if (!function_exists('newsphere_get_posts')):
 
 endif;
 
+/* get post curkum */
+if (!function_exists('newsphere_get_posts_curkum')):
+    function newsphere_get_posts_curkum($number_of_posts)
+    {
+
+        $ins_args = array(
+            'post_type' => 'post',
+            'posts_per_page' => absint($number_of_posts),
+            'post_status' => 'publish',
+            'orderby' => 'date',
+            'category'=>0,
+            'category_name' => 'Curkum',
+            'order' => 'DESC',
+            'ignore_sticky_posts' => true
+        );
+
+        
+        $all_posts = new WP_Query($ins_args);
+
+        return $all_posts;
+    }
+
+endif;
+
+/* get post random */
+if (!function_exists('newsphere_get_posts_rand')):
+    function newsphere_get_posts_rand($number_of_posts, $category = '0')
+    {
+
+        $ins_args = array(
+            'post_type' => 'post',
+            'posts_per_page' => 10,
+            'post_status' => 'publish',
+            'category_name' => 'Curkum,Esai,Tips Hukum,Bedah Kasus',
+            'orderby' => 'rand',
+            'order'    => 'ASC',  
+            'ignore_sticky_posts' => true
+        );
+
+        $category = isset($category) ? $category : '0';
+        if (absint($category) > 0) {
+            $ins_args['cat'] = absint($category);
+        }
+
+        $all_posts = new WP_Query($ins_args);
+
+        return $all_posts;
+    }
+
+endif;
+
+
+if (!function_exists('newsphere_get_posts_rand_post')) :
+    function newsphere_get_posts_rand_post($number_of_posts, $category = '0')
+    {
+
+        $ins_args = array(
+            'post_type' => 'post',
+            'posts_per_page' => 6,
+            'post_status' => 'publish',
+            'category_name' => 'Curkum,Esai,Tips Hukum,Bedah Kasus',
+            'orderby' => 'rand',
+            'order'    => 'ASC',
+            'ignore_sticky_posts' => true
+        );
+
+        $category = isset($category) ? $category : '0';
+        if (absint($category) > 0) {
+            $ins_args['cat'] = absint($category);
+        }
+
+        $all_posts = new WP_Query($ins_args);
+
+        return $all_posts;
+    }
+
+endif;
+
 
 /**
  * Returns no image url.
@@ -434,7 +512,7 @@ if (!function_exists('newsphere_count_content_words')) :
             $word_per_min = ceil($word_per_min);
 
            if ( absint($word_per_min) > 0) {
-                $word_count_strings = sprintf(_n('%s min read', '%s min read', number_format_i18n($word_per_min), 'newsphere'), number_format_i18n($word_per_min));
+                $word_count_strings = sprintf(_n('%s menit', '%s menit', number_format_i18n($word_per_min), 'newsphere'), number_format_i18n($word_per_min));
                 if ('post' == get_post_type($post_id)):
                     echo '<span class="min-read">';
                     echo esc_html($word_count_strings);
@@ -552,6 +630,5 @@ if (!function_exists('newsphere_pagination_scripts_args')):
 
     }
 endif;
-
 
 
